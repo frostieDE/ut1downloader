@@ -1,0 +1,57 @@
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore'
+  inputs:
+    command: 'restore'
+  
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    command: 'build'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test'
+  inputs:
+    command: 'test'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish (win-x64)'
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    arguments: '--self-contained --arch x64 --os win'
+    zipAfterPublish: false
+    modifyOutputPath: false
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish (linux-x64)'
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    arguments: '--self-contained --arch x64 --os linux'
+    zipAfterPublish: false
+    modifyOutputPath: false
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish (linux-arm)'
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    arguments: '--self-contained --arch arm --os linux'
+    zipAfterPublish: false
+    modifyOutputPath: false
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish (linux-arm64)'
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    arguments: '--self-contained --arch arm64 --os linux'
+    zipAfterPublish: false
+    modifyOutputPath: false
