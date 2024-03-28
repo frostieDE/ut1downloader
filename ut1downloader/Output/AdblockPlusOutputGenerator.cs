@@ -4,7 +4,9 @@
     {
         public string[] TransformLine(string line)
         {
-            if (Uri.CheckHostName(line.Trim()) == UriHostNameType.Dns)
+            line = line.Trim();
+
+            if (Uri.CheckHostName(line) == UriHostNameType.Dns)
             {
                 return [$"||{line}^"];
             }

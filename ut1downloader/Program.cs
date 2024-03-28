@@ -3,6 +3,7 @@ using CommandLine;
 using Spectre.Console;
 using System.Text;
 using UT1Downloader;
+using UT1Downloader.Http;
 using UT1Downloader.Input;
 using UT1Downloader.Output;
 
@@ -10,7 +11,7 @@ await Parser.Default.ParseArguments<Options>(args)
     .WithParsedAsync(async (options) =>
     {
         var console = new FancyConsole();
-        var input = new TarGzWebInput(@"http://dsi.ut-capitole.fr/blacklists/download/", console);
+        var input = new TarGzWebInput(@"http://dsi.ut-capitole.fr/blacklists/download/", new Http(console), console);
         IOutputGenerator generator = options.OutputStyle == "abp" ? new AdblockPlusOutputGenerator() : new HostOutputGenerator();
 
         var outputDirectory = Path.GetFullPath(options.Output);
@@ -18,7 +19,15 @@ await Parser.Default.ParseArguments<Options>(args)
         if (!Directory.Exists(outputDirectory))
         {
             console.WriteError($"Directory {outputDirectory} does not exist. Creating...");
-            Directory.CreateDirectory(outputDirectory);
+            try
+            {
+                Directory.CreateDirectory(outputDirectory);
+            }
+            catch (Exception e)
+            {
+                console.WriteException(e);
+                Environment.Exit(1);
+            }
             console.WriteSuccess("Directory created.");
         }
         else

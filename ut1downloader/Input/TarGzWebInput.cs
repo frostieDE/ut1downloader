@@ -1,29 +1,29 @@
 ﻿using ICSharpCode.SharpZipLib.GZip;
 using ICSharpCode.SharpZipLib.Tar;
 using System.Text;
+using UT1Downloader.Http;
 
 namespace UT1Downloader.Input
 {
-    public class TarGzWebInput(string baseUrl, IConsole console) : IInput
+    public class TarGzWebInput(string baseUrl, IHttp httpClient, IConsole console) : IInput
     {
-        private readonly string baseUrl = baseUrl;
         private readonly IConsole console = console;
 
         public async Task<string> GetInputAsync(string category)
         {
-            using var client = new HttpClient();
-            var downloadUrl = $"{this.baseUrl}/{category}.tar.gz";
-            console.WriteStatus($"Downloading {category}...");
-            var response = await client.GetAsync(downloadUrl);
-            console.WriteSuccess("Download completed.");
+            var response = await httpClient.DownloadAsStream($"{baseUrl}/{category}.tar.gz");            
 
-            response.EnsureSuccessStatusCode();
+            if(response == null)
+            {
+                console.WriteError($"Downloading failed.");
+                return "";
+            }
 
             var entryFound = false;
             string input = string.Empty;
             console.WriteStatus($"Extracting domains file into memory");
 
-            using (var gzipStream = new GZipInputStream(response.Content.ReadAsStream()))
+            using (var gzipStream = new GZipInputStream(response))
             {
                 using var tarStream = new TarInputStream(gzipStream, Encoding.UTF8);
                 TarEntry entry;
@@ -43,7 +43,7 @@ namespace UT1Downloader.Input
 
             if (entryFound == false)
             {
-                console.WriteError($"File domains not present in archive. Downloaded from: {downloadUrl}");
+                console.WriteError($"File domains not present in archive.");
             }
 
             return input;
