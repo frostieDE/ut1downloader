@@ -7,8 +7,6 @@ namespace UT1Downloader.Test.Input
     [TestClass]
     public class TarGzWebInputTest
     {
-        private static readonly string baseUrl = @"http://dsi.ut-capitole.fr/blacklists/download/";
-
         [TestMethod]
         public async Task TestInvalidArchive()
         {
