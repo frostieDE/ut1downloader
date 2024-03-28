@@ -11,7 +11,7 @@ await Parser.Default.ParseArguments<Options>(args)
     .WithParsedAsync(async (options) =>
     {
         var console = new FancyConsole();
-        var input = new TarGzWebInput(@"http://dsi.ut-capitole.fr/blacklists/download/", new Http(console), console);
+        var input = new TarGzWebInput(@"https://dsi.ut-capitole.fr/blacklists/download/", new Http(console), console);
         IOutputGenerator generator = options.OutputStyle == "abp" ? new AdblockPlusOutputGenerator() : new HostOutputGenerator();
 
         var outputDirectory = Path.GetFullPath(options.Output);
