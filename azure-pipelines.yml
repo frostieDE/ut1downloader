@@ -93,6 +93,5 @@ steps:
   inputs:
     gitHubConnection: 'GitHub.com'
     repositoryName: frostieDE/ut1downloader
-    assets: |
-      '$(Build.ArtifactStagingDirectory)/*'
+    assets: $(Build.ArtifactStagingDirectory)/*
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
