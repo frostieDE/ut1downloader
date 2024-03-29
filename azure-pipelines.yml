@@ -94,5 +94,5 @@ steps:
     gitHubConnection: 'GitHub.com'
     repositoryName: frostieDE/ut1downloader
     assets: |
-      'publish/*'
+      'publish/**'
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
