@@ -82,9 +82,16 @@ steps:
     targetType: 'inline'
     script: 'cp src/bin/Release/net8.0/linux-arm64/publish/UT1Downloader publish/UT1Downloader-linux-arm64'
 
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'publish'
+    Contents: |
+      '*'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'publish'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'publish'
     publishLocation: 'Container'
 
@@ -94,5 +101,5 @@ steps:
     gitHubConnection: 'GitHub.com'
     repositoryName: frostieDE/ut1downloader
     assets: |
-      'publish/**'
+      '$(Build.ArtifactStagingDirectory)/*'
   condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
