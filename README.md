@@ -1,5 +1,14 @@
 # UT1Downloader
 
+[![Build Status](https://dev.azure.com/frostieDE/UT1Downloader/_apis/build/status%2FfrostieDE.ut1downloader?branchName=main)](https://dev.azure.com/frostieDE/UT1Downloader/_build/latest?definitionId=2&branchName=main)
+![Static Badge](https://img.shields.io/badge/.NET-8.0-purple?style=flat-square)
+![Static Badge](https://img.shields.io/badge/Windows-x64-blue?style=flat-square)
+![Static Badge](https://img.shields.io/badge/Linux-x64-blue?style=flat-square)
+![Static Badge](https://img.shields.io/badge/Linux-arm-blue?style=flat-square)
+![Static Badge](https://img.shields.io/badge/Linux-arm64-blue?style=flat-square)
+
+
+
 This tool downloads parts of the UT1 blocklist and transforms them into either the
 host or adblock-plus format in order to use those blocklists with Pi-Hole.
 
