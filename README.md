@@ -54,6 +54,10 @@ Great idea, but I am not familiar with Git LFS. Thus, I am not able to provide t
 to GitHub. Feel free to help me with this 😊 But we have to respect the original license of the
 blocklists.
 
+### Your Azure Pipeline is a mess. Can I fix it?
+
+Very much so 🤣 I am not an expert on this, but it works fine for now.
+
 ## Disclaimer
 
 I am not related to the [UT1 Blocklist project](https://dsi.ut-capitole.fr/blacklists/index_en.php).
