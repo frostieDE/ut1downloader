@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ut1downloader\UT1Downloader.csproj" />
+    <ProjectReference Include="..\src\UT1Downloader.csproj" />
   </ItemGroup>
 
   <ItemGroup>
