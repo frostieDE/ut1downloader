@@ -62,32 +62,25 @@ steps:
   displayName: 'copy binary (win-x64)'
   inputs:
     targetType: 'inline'
-    script: 'cp src/bin/Release/net8.0/win-x64/publish/UT1Downloader.exe publish/UT1Downloader-win-x64.exe'
+    script: 'cp src/bin/Release/net8.0/win-x64/publish/UT1Downloader.exe $(Build.ArtifactStagingDirectory)/UT1Downloader-win-x64.exe'
 
 - task: Bash@3
   displayName: 'copy binary (linux-x64)'
   inputs:
     targetType: 'inline'
-    script: 'cp src/bin/Release/net8.0/linux-x64/publish/UT1Downloader publish/UT1Downloader-linux-x64'
+    script: 'cp src/bin/Release/net8.0/linux-x64/publish/UT1Downloader $(Build.ArtifactStagingDirectory)/UT1Downloader-linux-x64'
 
 - task: Bash@3
   displayName: 'copy binary (linux-arm)'
   inputs:
     targetType: 'inline'
-    script: 'cp src/bin/Release/net8.0/linux-arm/publish/UT1Downloader publish/UT1Downloader-linux-arm'
+    script: 'cp src/bin/Release/net8.0/linux-arm/publish/UT1Downloader $(Build.ArtifactStagingDirectory)/UT1Downloader-linux-arm'
 
 - task: Bash@3
   displayName: 'copy binary (linux-arm64)'
   inputs:
     targetType: 'inline'
-    script: 'cp src/bin/Release/net8.0/linux-arm64/publish/UT1Downloader publish/UT1Downloader-linux-arm64'
-
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: 'publish'
-    Contents: |
-      '*'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    script: 'cp src/bin/Release/net8.0/linux-arm64/publish/UT1Downloader $(Build.ArtifactStagingDirectory)/UT1Downloader-linux-arm64'
 
 - task: PublishBuildArtifacts@1
   inputs:
