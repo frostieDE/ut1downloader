@@ -11,7 +11,7 @@ namespace UT1Downloader.Input
 
         public async Task<string> GetInputAsync(string category)
         {
-            var response = await httpClient.DownloadAsStream($"{baseUrl}/{category}.tar.gz");            
+            var response = await httpClient.DownloadAsStream($"{baseUrl.TrimEnd('/')}/{category}.tar.gz");            
 
             if(response == null)
             {
